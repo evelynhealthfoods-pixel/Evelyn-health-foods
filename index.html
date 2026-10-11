@@ -1,1 +1,762 @@
+```html
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evelyn Healthy Foods | Pure Plant Power. Uncompromising Taste.</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            200: '#bbf7d0',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            700: '#15803d',
+                            800: '#166534',
+                            900: '#14532d',
+                            dark: '#0e3a1f',
+                        },
+                        cream: '#fdfbf7',
+                        gold: '#d97706',
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(22, 163, 74, 0.15);
+        }
+        .hero-bg {
+            background: linear-gradient(135deg, #0e3a1f 0%, #166534 50%, #15803d 100%);
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800 font-sans antialiased flex flex-col min-h-screen">
 
+    <!-- Sticky Navigation Header -->
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-stone-200/80 shadow-sm transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Brand Logo -->
+                <a href="#" class="flex items-center gap-3 group">
+                    <div class="w-11 h-11 rounded-xl bg-brand-700 flex items-center justify-center text-white shadow-md shadow-brand-700/20 group-hover:bg-brand-600 transition-colors">
+                        <i data-lucide="leaf" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <span class="text-xl font-extrabold tracking-tight text-brand-dark block leading-none">EVELYN</span>
+                        <span class="text-xs font-semibold tracking-widest text-brand-600 uppercase">Healthy Foods</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Navigation Links -->
+                <nav class="hidden md:flex items-center gap-8 font-medium text-stone-600 text-sm">
+                    <a href="#store" class="hover:text-brand-700 transition-colors">Products & Menu</a>
+                    <a href="#recipes" class="hover:text-brand-700 transition-colors">Recipes & Ideas</a>
+                    <a href="#benefits" class="hover:text-brand-700 transition-colors">Why Vital Gluten?</a>
+                    <a href="#github-guide" class="hover:text-brand-700 transition-colors">GitHub Hosting Guide</a>
+                </nav>
+
+                <!-- Action Controls (Cart & Direct WhatsApp Button) -->
+                <div class="flex items-center gap-3">
+                    <button onclick="toggleCartModal()" class="relative p-2.5 rounded-xl bg-stone-100 hover:bg-brand-50 text-stone-700 hover:text-brand-700 transition-all border border-stone-200">
+                        <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+                        <span id="cartCountBadge" class="absolute -top-1 -right-1 bg-brand-600 text-white text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center hidden">0</span>
+                    </button>
+
+                    <a href="https://wa.me/263774353952?text=Hi%20Evelyn%20Healthy%20Foods!%20I%20would%20like%20to%20inquire%20about%20your%20products." target="_blank" class="hidden sm:inline-flex items-center gap-2 bg-brand-700 hover:bg-brand-800 text-white px-4 py-2.5 rounded-xl font-semibold text-sm shadow-md shadow-brand-700/20 transition-all transform hover:-translate-y-0.5">
+                        <i data-lucide="phone-call" class="w-4 h-4"></i>
+                        <span>Order (0774353952)</span>
+                    </a>
+
+                    <!-- Mobile Navigation Toggle Button -->
+                    <button onclick="toggleMobileMenu()" class="md:hidden p-2 rounded-xl text-stone-600 hover:text-stone-900 hover:bg-stone-100">
+                        <i data-lucide="menu" id="menuIcon" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobileMenu" class="hidden md:hidden border-t border-stone-200 bg-white px-4 pt-3 pb-6 space-y-3">
+            <a href="#store" onclick="toggleMobileMenu()" class="block py-2 text-stone-700 font-medium hover:text-brand-700">Products & Menu</a>
+            <a href="#recipes" onclick="toggleMobileMenu()" class="block py-2 text-stone-700 font-medium hover:text-brand-700">Recipes & Ideas</a>
+            <a href="#benefits" onclick="toggleMobileMenu()" class="block py-2 text-stone-700 font-medium hover:text-brand-700">Why Vital Gluten?</a>
+            <a href="#github-guide" onclick="toggleMobileMenu()" class="block py-2 text-stone-700 font-medium hover:text-brand-700">GitHub Hosting Guide</a>
+            <a href="https://wa.me/263774353952" target="_blank" class="flex items-center justify-center gap-2 bg-brand-700 text-white py-3 rounded-xl font-semibold shadow-md">
+                <i data-lucide="message-circle" class="w-5 h-5"></i>
+                <span>WhatsApp Order (0774353952)</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Hero Section -->
+    <section class="relative hero-bg text-white overflow-hidden py-16 lg:py-24">
+        <!-- Subtle Pattern Background Overlay -->
+        <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Hero Text Content -->
+                <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-cream text-xs font-semibold uppercase tracking-wider">
+                        <i data-lucide="sparkles" class="w-4 h-4 text-amber-300"></i>
+                        <span>100% Vegetarian & Vegan Protein</span>
+                    </div>
+
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight">
+                        Pure Plant Power.<br/>
+                        <span class="text-emerald-300">Uncompromising Taste.</span>
+                    </h1>
+
+                    <p class="text-lg sm:text-xl text-emerald-100 max-w-2xl font-light leading-relaxed">
+                        Delicious, high-protein plant-based meats crafted from premium <strong class="font-semibold text-white">Vital Wheat Gluten</strong>. Tastes like the real thing—better for you, your family, and the planet.
+                    </p>
+
+                    <!-- Key Selling Badges -->
+                    <div class="pt-2 flex flex-wrap justify-center lg:justify-start gap-3 text-sm">
+                        <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-900/60 border border-emerald-500/30 font-medium">
+                            <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400"></i> Flat $2.50 Per Pack
+                        </span>
+                        <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-900/60 border border-emerald-500/30 font-medium">
+                            <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400"></i> High Protein & Zero Meat
+                        </span>
+                        <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-900/60 border border-emerald-500/30 font-medium">
+                            <i data-lucide="map-pin" class="w-4 h-4 text-amber-300"></i> Bulawayo & Nationwide Zimbabwe
+                        </span>
+                    </div>
+
+                    <!-- Call To Actions -->
+                    <div class="pt-4 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                        <a href="#store" class="inline-flex items-center justify-center gap-2 bg-emerald-400 hover:bg-emerald-300 text-brand-dark font-bold px-8 py-4 rounded-xl shadow-lg transition-all transform hover:-translate-y-0.5 text-base">
+                            <i data-lucide="shopping-cart" class="w-5 h-5"></i>
+                            <span>Browse Menu & Order</span>
+                        </a>
+                        <a href="https://wa.me/263774353952?text=Hi%20Evelyn%20Healthy%20Foods!%20I%20want%20to%20place%20an%20order." target="_blank" class="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white border border-white/30 font-semibold px-8 py-4 rounded-xl transition-all text-base">
+                            <i data-lucide="message-circle" class="w-5 h-5 text-emerald-300"></i>
+                            <span>Quick WhatsApp Order</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Hero Visual Showcase Card -->
+                <div class="lg:col-span-5 flex justify-center">
+                    <div class="relative w-full max-w-md">
+                        <!-- Floating Badge -->
+                        <div class="absolute -top-5 -left-5 z-20 bg-amber-500 text-stone-900 font-extrabold px-4 py-2 rounded-2xl shadow-xl transform -rotate-3 border-2 border-white flex items-center gap-2">
+                            <i data-lucide="tag" class="w-5 h-5"></i>
+                            <span>ALL RANGES $2.50 ONLY</span>
+                        </div>
+
+                        <!-- Card Deck -->
+                        <div class="glass-card rounded-3xl p-6 shadow-2xl text-stone-800 space-y-4 relative z-10 border border-white/40">
+                            <div class="flex items-center justify-between border-b border-stone-200 pb-4">
+                                <span class="font-bold text-lg text-brand-dark">Featured Products</span>
+                                <span class="bg-emerald-100 text-brand-800 text-xs font-bold px-2.5 py-1 rounded-full uppercase">100% Vegan</span>
+                            </div>
+
+                            <div class="space-y-3">
+                                <div class="flex items-center gap-3 p-2.5 rounded-xl bg-stone-50 border border-stone-100 hover:border-brand-300 transition-colors">
+                                    <div class="w-12 h-12 rounded-lg bg-emerald-100 text-brand-700 flex items-center justify-center font-bold text-xl">🌭</div>
+                                    <div class="flex-1">
+                                        <h4 class="font-bold text-stone-900 text-sm">Vegetarian Sausages</h4>
+                                        <p class="text-xs text-stone-500">Juicy & savory sizzle</p>
+                                    </div>
+                                    <span class="font-extrabold text-brand-700">$2.50</span>
+                                </div>
+
+                                <div class="flex items-center gap-3 p-2.5 rounded-xl bg-stone-50 border border-stone-100 hover:border-brand-300 transition-colors">
+                                    <div class="w-12 h-12 rounded-lg bg-amber-100 text-amber-800 flex items-center justify-center font-bold text-xl">🍔</div>
+                                    <div class="flex-1">
+                                        <h4 class="font-bold text-stone-900 text-sm">Burger Patties</h4>
+                                        <p class="text-xs text-stone-500">Perfect grill texture</p>
+                                    </div>
+                                    <span class="font-extrabold text-brand-700">$2.50</span>
+                                </div>
+
+                                <div class="flex items-center gap-3 p-2.5 rounded-xl bg-stone-50 border border-stone-100 hover:border-brand-300 transition-colors">
+                                    <div class="w-12 h-12 rounded-lg bg-red-100 text-red-700 flex items-center justify-center font-bold text-xl">🧆</div>
+                                    <div class="flex-1">
+                                        <h4 class="font-bold text-stone-900 text-sm">Savory Meat Balls</h4>
+                                        <p class="text-xs text-stone-500">Rich pasta & stew companion</p>
+                                    </div>
+                                    <span class="font-extrabold text-brand-700">$2.50</span>
+                                </div>
+                            </div>
+
+                            <button onclick="scrollToStore()" class="w-full py-3 bg-brand-700 hover:bg-brand-800 text-white font-bold rounded-xl shadow-md transition-colors text-sm flex items-center justify-center gap-2">
+                                <span>See Full $2.50 Menu</span>
+                                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Digital Storefront -->
+    <section id="store" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex-grow w-full">
+        <div class="text-center max-w-3xl mx-auto mb-10 space-y-3">
+            <h2 class="text-xs font-extrabold uppercase tracking-widest text-brand-600">Digital Storefront</h2>
+            <h3 class="text-3xl sm:text-4xl font-extrabold text-stone-900">Choose Your Favorite Plant Proteins</h3>
+            <p class="text-stone-600 text-sm sm:text-base">Every pack is freshly prepared, packed with protein, and available at an affordable flat price of <span class="font-bold text-brand-700">$2.50 each</span>.</p>
+        </div>
+
+        <!-- Filter Category Tabs -->
+        <div class="flex items-center justify-center gap-2 overflow-x-auto pb-4 mb-8 hide-scrollbar">
+            <button onclick="filterProducts('all')" class="filter-btn px-5 py-2.5 rounded-full text-sm font-semibold transition-all bg-brand-700 text-white shadow-md" data-category="all">
+                All Products
+            </button>
+            <button onclick="filterProducts('sausages')" class="filter-btn px-5 py-2.5 rounded-full text-sm font-semibold transition-all bg-stone-200 text-stone-700 hover:bg-stone-300" data-category="sausages">
+                Sausages & Patties
+            </button>
+            <button onclick="filterProducts('mince')" class="filter-btn px-5 py-2.5 rounded-full text-sm font-semibold transition-all bg-stone-200 text-stone-700 hover:bg-stone-300" data-category="mince">
+                Mince & Cubes
+            </button>
+            <button onclick="filterProducts('balls')" class="filter-btn px-5 py-2.5 rounded-full text-sm font-semibold transition-all bg-stone-200 text-stone-700 hover:bg-stone-300" data-category="balls">
+                Meat Balls & Strips
+            </button>
+        </div>
+
+        <!-- Product Cards Grid -->
+        <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+            <!-- Dynamic JavaScript Product Injection -->
+        </div>
+    </section>
+
+    <!-- Interactive Recipe & Meal Generator -->
+    <section id="recipes" class="py-16 bg-emerald-900 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-10 space-y-2">
+                <span class="text-xs font-bold uppercase tracking-widest text-emerald-300">Kitchen Inspiration</span>
+                <h2 class="text-3xl font-extrabold">What Are You Cooking Today?</h2>
+                <p class="text-emerald-100 text-sm">Select your meal type to get easy, high-protein recipe ideas using Evelyn products!</p>
+            </div>
+
+            <!-- Recipe Selector Pills -->
+            <div class="flex flex-wrap justify-center gap-3 mb-10">
+                <button onclick="showRecipe('breakfast')" class="recipe-tab px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-sm font-semibold transition-all active-recipe" data-recipe="breakfast">
+                    🍳 Quick Breakfast
+                </button>
+                <button onclick="showRecipe('dinner')" class="recipe-tab px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-sm font-semibold transition-all" data-recipe="dinner">
+                    🍲 Family Stew & Dinner
+                </button>
+                <button onclick="showRecipe('fastfood')" class="recipe-tab px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-sm font-semibold transition-all" data-recipe="fastfood">
+                    🍔 Fast-Food Style Burgers
+                </button>
+                <button onclick="showRecipe('prep')" class="recipe-tab px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-sm font-semibold transition-all" data-recipe="prep">
+                    💪 High-Protein Meal Prep
+                </button>
+            </div>
+
+            <!-- Recipe Output Container -->
+            <div id="recipeDisplayCard" class="max-w-3xl mx-auto bg-stone-900/80 rounded-2xl p-6 sm:p-8 border border-emerald-500/30 shadow-2xl space-y-6">
+                <!-- Javascript will load content dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Vital Wheat Gluten Benefits Section -->
+    <section id="benefits" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-12 space-y-3">
+            <span class="text-xs font-extrabold uppercase tracking-widest text-brand-600">The Power Ingredient</span>
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-stone-900">Why Vital Wheat Gluten?</h2>
+            <p class="text-stone-600 text-sm sm:text-base">Vital Wheat Gluten is the natural protein extracted from wheat grain. It provides a chewy, realistic meat-like texture without any animal products!</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="p-6 rounded-2xl bg-white border border-stone-200/80 shadow-sm hover:shadow-md transition-shadow">
+                <div class="w-12 h-12 rounded-xl bg-emerald-100 text-brand-700 flex items-center justify-center mb-4">
+                    <i data-lucide="dumbbell" class="w-6 h-6"></i>
+                </div>
+                <h3 class="font-bold text-lg text-stone-900 mb-2">Ultra-High Protein</h3>
+                <p class="text-sm text-stone-600">Contains over 75% pure plant protein per portion to fuel your active lifestyle and keep you full longer.</p>
+            </div>
+
+            <div class="p-6 rounded-2xl bg-white border border-stone-200/80 shadow-sm hover:shadow-md transition-shadow">
+                <div class="w-12 h-12 rounded-xl bg-emerald-100 text-brand-700 flex items-center justify-center mb-4">
+                    <i data-lucide="heart-pulse" class="w-6 h-6"></i>
+                </div>
+                <h3 class="font-bold text-lg text-stone-900 mb-2">Zero Cholesterol</h3>
+                <p class="text-sm text-stone-600">100% plant-based meat alternative with zero animal fats, zero cholesterol, and low sodium support.</p>
+            </div>
+
+            <div class="p-6 rounded-2xl bg-white border border-stone-200/80 shadow-sm hover:shadow-md transition-shadow">
+                <div class="w-12 h-12 rounded-xl bg-emerald-100 text-brand-700 flex items-center justify-center mb-4">
+                    <i data-lucide="chef-hat" class="w-6 h-6"></i>
+                </div>
+                <h3 class="font-bold text-lg text-stone-900 mb-2">Cooks Like Real Meat</h3>
+                <p class="text-sm text-stone-600">Absorbs sauces and seasonings brilliantly! Fry, boil, grill, or roast just like traditional beef or chicken.</p>
+            </div>
+
+            <div class="p-6 rounded-2xl bg-white border border-stone-200/80 shadow-sm hover:shadow-md transition-shadow">
+                <div class="w-12 h-12 rounded-xl bg-emerald-100 text-brand-700 flex items-center justify-center mb-4">
+                    <i data-lucide="globe-2" class="w-6 h-6"></i>
+                </div>
+                <h3 class="font-bold text-lg text-stone-900 mb-2">Eco & Budget Friendly</h3>
+                <p class="text-sm text-stone-600">Dramatically lower carbon footprint than livestock farming at an affordable flat price of $2.50 per pack.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- GitHub Free Hosting Guide Modal Section -->
+    <section id="github-guide" class="py-16 bg-stone-100 border-t border-stone-200">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-white rounded-3xl p-6 sm:p-10 border border-stone-200 shadow-sm space-y-6">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-stone-900 text-white flex items-center justify-center">
+                        <i data-lucide="github" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-2xl font-bold text-stone-900">Host This Site For FREE on GitHub Pages</h2>
+                        <p class="text-sm text-stone-500">Follow these 5 quick steps to publish this website online under 3 minutes!</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
+                    <div class="p-4 rounded-xl bg-stone-50 border border-stone-200 flex gap-3">
+                        <span class="w-7 h-7 rounded-full bg-brand-700 text-white font-bold flex items-center justify-center shrink-0">1</span>
+                        <div>
+                            <strong class="text-stone-900 block font-semibold">Create GitHub Account</strong>
+                            <p class="text-stone-600 text-xs mt-1">Visit <a href="https://github.com" target="_blank" class="text-brand-700 underline">github.com</a> and log in or create a free account.</p>
+                        </div>
+                    </div>
+
+                    <div class="p-4 rounded-xl bg-stone-50 border border-stone-200 flex gap-3">
+                        <span class="w-7 h-7 rounded-full bg-brand-700 text-white font-bold flex items-center justify-center shrink-0">2</span>
+                        <div>
+                            <strong class="text-stone-900 block font-semibold">Create New Repository</strong>
+                            <p class="text-stone-600 text-xs mt-1">Click the "+" icon -> "New Repository". Name it <code>evelyn-healthy-foods</code> and select Public.</p>
+                        </div>
+                    </div>
+
+                    <div class="p-4 rounded-xl bg-stone-50 border border-stone-200 flex gap-3">
+                        <span class="w-7 h-7 rounded-full bg-brand-700 text-white font-bold flex items-center justify-center shrink-0">3</span>
+                        <div>
+                            <strong class="text-stone-900 block font-semibold">Upload File</strong>
+                            <p class="text-stone-600 text-xs mt-1">Click "uploading an existing file" and upload this file renamed as <code>index.html</code>.</p>
+                        </div>
+                    </div>
+
+                    <div class="p-4 rounded-xl bg-stone-50 border border-stone-200 flex gap-3">
+                        <span class="w-7 h-7 rounded-full bg-brand-700 text-white font-bold flex items-center justify-center shrink-0">4</span>
+                        <div>
+                            <strong class="text-stone-900 block font-semibold">Enable GitHub Pages</strong>
+                            <p class="text-stone-600 text-xs mt-1">Go to Repo Settings -> Pages -> Source: select <code>main</code> branch -> click Save.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-900 text-sm flex items-center justify-between flex-wrap gap-3">
+                    <div class="flex items-center gap-2">
+                        <i data-lucide="globe" class="w-5 h-5 text-brand-700"></i>
+                        <span>Your website will instantly go live at: <strong>https://yourusername.github.io/evelyn-healthy-foods/</strong></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-brand-dark text-white border-t border-emerald-900 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="space-y-3">
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-lg bg-emerald-500 flex items-center justify-center text-brand-dark">
+                            <i data-lucide="leaf" class="w-5 h-5"></i>
+                        </div>
+                        <span class="text-lg font-bold">Evelyn Healthy Foods</span>
+                    </div>
+                    <p class="text-xs text-emerald-200 leading-relaxed">
+                        Pure Plant Power. Uncompromising Taste.<br/>
+                        Making high-protein vegetarian meals accessible, healthy, and delicious across Zimbabwe.
+                    </p>
+                </div>
+
+                <div class="space-y-2">
+                    <h4 class="font-bold text-sm text-emerald-300 uppercase tracking-wider">Contact & Location</h4>
+                    <p class="text-xs text-emerald-100 flex items-center gap-2">
+                        <i data-lucide="phone" class="w-4 h-4 text-emerald-400"></i>
+                        WhatsApp / Call: 0774353952
+                    </p>
+                    <p class="text-xs text-emerald-100 flex items-center gap-2">
+                        <i data-lucide="map-pin" class="w-4 h-4 text-amber-300"></i>
+                        Bulawayo & Nationwide Zimbabwe Delivery
+                    </p>
+                </div>
+
+                <div class="space-y-2">
+                    <h4 class="font-bold text-sm text-emerald-300 uppercase tracking-wider">Target Markets</h4>
+                    <p class="text-xs text-emerald-200">
+                        • Vegans, Vegetarians & Health-Conscious Families<br/>
+                        • Meal Preppers & Fitness Enthusiasts<br/>
+                        • Restaurants, Caterers & Fast-Food Outlets
+                    </p>
+                </div>
+            </div>
+
+            <div class="pt-6 border-t border-emerald-800/80 text-center text-xs text-emerald-400 flex flex-col sm:flex-row justify-between items-center gap-3">
+                <p>&copy; 2026 Evelyn Healthy Foods. All rights reserved.</p>
+                <p class="flex items-center gap-1">
+                    <span>Eat Clean, Live Well</span> 🌱
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Order / Cart Modal Drawer -->
+    <div id="cartModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex justify-end opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="w-full max-w-md bg-white h-full shadow-2xl flex flex-col transform translate-x-full transition-transform duration-300" id="cartContent">
+            
+            <!-- Modal Header -->
+            <div class="p-5 border-b border-stone-200 flex items-center justify-between bg-stone-50">
+                <div class="flex items-center gap-2">
+                    <i data-lucide="shopping-bag" class="w-5 h-5 text-brand-700"></i>
+                    <h3 class="font-bold text-stone-900 text-lg">Your Order Basket</h3>
+                </div>
+                <button onclick="toggleCartModal()" class="p-2 text-stone-400 hover:text-stone-700 rounded-lg">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+
+            <!-- Cart Items List Container -->
+            <div id="cartItemsList" class="flex-1 overflow-y-auto p-5 space-y-4">
+                <!-- Javascript will load items -->
+            </div>
+
+            <!-- Modal Footer & WhatsApp Order CTA -->
+            <div class="p-5 border-t border-stone-200 bg-stone-50 space-y-4">
+                <div class="space-y-2">
+                    <label class="block text-xs font-semibold text-stone-600 uppercase">Your Delivery City / Location</label>
+                    <input type="text" id="deliveryLocation" placeholder="e.g. Bulawayo, Harare, Gweru..." class="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 text-sm focus:outline-none focus:ring-2 focus:ring-brand-600">
+                </div>
+
+                <div class="flex items-center justify-between text-base font-extrabold text-stone-900 pt-2 border-t border-stone-200">
+                    <span>Total USD ($):</span>
+                    <span id="cartTotalDisplay" class="text-xl text-brand-700">$0.00</span>
+                </div>
+
+                <button onclick="sendWhatsAppOrder()" class="w-full py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl shadow-lg flex items-center justify-center gap-2 text-sm transition-all">
+                    <i data-lucide="message-square" class="w-5 h-5"></i>
+                    <span>Send Order via WhatsApp (0774353952)</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Data Store for Products
+        const products = [
+            { id: 'sausages', name: 'Vegetarian Sausages', category: 'sausages', price: 2.50, desc: 'Juicy, sizzling plant-based sausages high in protein.', icon: '🌭', badge: 'Popular' },
+            { id: 'patties', name: 'Vegetarian Burger Patties', category: 'sausages', price: 2.50, desc: 'Firm, flavorful patties built for gourmet burgers.', icon: '🍔', badge: 'Best Seller' },
+            { id: 'meatballs', name: 'Savory Veggie Meat Balls', category: 'balls', price: 2.50, desc: 'Tender meatballs perfect for spaghetti & rich tomato stews.', icon: '🧆', badge: 'Chef Choice' },
+            { id: 'strips', name: 'Tender Strips', category: 'balls', price: 2.50, desc: 'Versatile strips ideal for stir-fries, wraps, and salads.', icon: '🥢', badge: 'High Protein' },
+            { id: 'mince', name: 'Versatile Vegetarian Mince', category: 'mince', price: 2.50, desc: 'Great for lasagna, pies, tacos, and everyday relish.', icon: '🍲', badge: 'Family Favorite' },
+            { id: 'cubes', name: 'Vegetarian Cubes', category: 'mince', price: 2.50, desc: 'Bite-sized gluten cubes perfect for curries and soups.', icon: '🎲', badge: 'Great Texture' },
+        ];
+
+        // Recipe Data Engine
+        const recipes = {
+            breakfast: {
+                title: "Power Protein Sausage & Scramble",
+                product: "Vegetarian Sausages ($2.50)",
+                prep: "10 Mins",
+                steps: [
+                    "Pan-fry sliced Evelyn Vegetarian Sausages in olive oil for 4 minutes until golden.",
+                    "Serve alongside scrambled eggs or seasoned tofu and avocado toast.",
+                    "Garnish with fresh greens for a high-energy start to your day!"
+                ]
+            },
+            dinner: {
+                title: "Rich Veggie Mince Stew & Sadza/Rice",
+                product: "Versatile Vegetarian Mince ($2.50)",
+                prep: "20 Mins",
+                steps: [
+                    "Sauté chopped onions, garlic, and sweet peppers in a skillet.",
+                    "Add 1 pack Evelyn Mince with diced tomatoes and paprika.",
+                    "Simmer for 12-15 minutes until rich and thick. Serve hot with Sadza or Rice!"
+                ]
+            },
+            fastfood: {
+                title: "Gourmet Plant-Based Cheeseburger",
+                product: "Vegetarian Burger Patties ($2.50)",
+                prep: "12 Mins",
+                steps: [
+                    "Grill or pan-fry Evelyn Burger Patties with a dash of oil for 3-4 mins per side.",
+                    "Melt a slice of vegan/dairy cheese on top during the final minute.",
+                    "Assemble inside toasted buns with lettuce, tomato slices, pickles, and sauce!"
+                ]
+            },
+            prep: {
+                title: "High-Protein Stir-Fry Cubes",
+                product: "Vegetarian Cubes ($2.50)",
+                prep: "15 Mins",
+                steps: [
+                    "Brown Evelyn Cubes in a wok with soy sauce and ginger.",
+                    "Toss in mixed broccoli, carrots, and snap peas.",
+                    "Divide into meal prep containers with brown rice or quinoa for the week."
+                ]
+            }
+        };
+
+        // Cart State Management
+        let cart = {};
+
+        // Render Storefront Items
+        function renderProducts(filter = 'all') {
+            const grid = document.getElementById('productGrid');
+            grid.innerHTML = '';
+
+            const filtered = filter === 'all' 
+                ? products 
+                : products.filter(p => p.category === filter);
+
+            filtered.forEach(p => {
+                const qty = cart[p.id] || 0;
+                const card = document.createElement('div');
+                card.className = "bg-white rounded-2xl border border-stone-200/80 shadow-sm hover:shadow-lg transition-all p-6 flex flex-col justify-between group";
+                
+                card.innerHTML = `
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-4xl p-3 bg-emerald-50 rounded-2xl group-hover:scale-110 transition-transform">${p.icon}</span>
+                            <span class="bg-amber-100 text-amber-800 text-xs font-bold px-2.5 py-1 rounded-full uppercase">${p.badge}</span>
+                        </div>
+                        <h3 class="font-bold text-lg text-stone-900">${p.name}</h3>
+                        <p class="text-xs text-stone-500 mt-1 leading-relaxed">${p.desc}</p>
+                    </div>
+
+                    <div class="mt-6 pt-4 border-t border-stone-100 flex items-center justify-between">
+                        <div>
+                            <span class="text-xs text-stone-400 block font-medium">Flat Price</span>
+                            <span class="text-2xl font-extrabold text-brand-700">$${p.price.toFixed(2)}</span>
+                        </div>
+
+                        ${qty === 0 ? `
+                            <button onclick="addToCart('${p.id}')" class="px-4 py-2.5 bg-brand-700 hover:bg-brand-800 text-white rounded-xl font-bold text-xs shadow-md transition-colors flex items-center gap-1.5">
+                                <i data-lucide="plus" class="w-4 h-4"></i> Add to Order
+                            </button>
+                        ` : `
+                            <div class="flex items-center gap-2 bg-stone-100 p-1 rounded-xl border border-stone-200">
+                                <button onclick="updateQty('${p.id}', -1)" class="w-7 h-7 bg-white rounded-lg font-bold text-stone-700 hover:bg-stone-200 flex items-center justify-center">-</button>
+                                <span class="font-extrabold text-stone-800 text-sm px-1">${qty}</span>
+                                <button onclick="updateQty('${p.id}', 1)" class="w-7 h-7 bg-brand-700 text-white rounded-lg font-bold hover:bg-brand-800 flex items-center justify-center">+</button>
+                            </div>
+                        `}
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+            lucide.createIcons();
+        }
+
+        // Cart Actions
+        function addToCart(id) {
+            cart[id] = (cart[id] || 0) + 1;
+            updateCartUI();
+            renderProducts(currentFilter);
+        }
+
+        function updateQty(id, change) {
+            if (cart[id]) {
+                cart[id] += change;
+                if (cart[id] <= 0) delete cart[id];
+            }
+            updateCartUI();
+            renderProducts(currentFilter);
+        }
+
+        let currentFilter = 'all';
+        function filterProducts(category) {
+            currentFilter = category;
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                if (btn.dataset.category === category) {
+                    btn.className = "filter-btn px-5 py-2.5 rounded-full text-sm font-semibold transition-all bg-brand-700 text-white shadow-md";
+                } else {
+                    btn.className = "filter-btn px-5 py-2.5 rounded-full text-sm font-semibold transition-all bg-stone-200 text-stone-700 hover:bg-stone-300";
+                }
+            });
+            renderProducts(category);
+        }
+
+        function updateCartUI() {
+            const badge = document.getElementById('cartCountBadge');
+            const totalItemCount = Object.values(cart).reduce((a, b) => a + b, 0);
+
+            if (totalItemCount > 0) {
+                badge.innerText = totalItemCount;
+                badge.classList.remove('hidden');
+            } else {
+                badge.classList.add('hidden');
+            }
+
+            // Render Modal List
+            const cartList = document.getElementById('cartItemsList');
+            cartList.innerHTML = '';
+
+            let totalUSD = 0;
+
+            if (Object.keys(cart).length === 0) {
+                cartList.innerHTML = `
+                    <div class="text-center py-12 text-stone-400 space-y-2">
+                        <i data-lucide="shopping-bag" class="w-12 h-12 mx-auto stroke-1"></i>
+                        <p class="text-sm">Your order basket is currently empty.</p>
+                    </div>
+                `;
+            } else {
+                Object.keys(cart).forEach(id => {
+                    const item = products.find(p => p.id === id);
+                    const qty = cart[id];
+                    const subtotal = item.price * qty;
+                    totalUSD += subtotal;
+
+                    const div = document.createElement('div');
+                    div.className = "flex items-center justify-between p-3 rounded-xl bg-stone-50 border border-stone-200 text-sm";
+                    div.innerHTML = `
+                        <div class="flex items-center gap-3">
+                            <span class="text-2xl">${item.icon}</span>
+                            <div>
+                                <h4 class="font-bold text-stone-800">${item.name}</h4>
+                                <span class="text-xs text-stone-500">$${item.price.toFixed(2)} x ${qty}</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="font-bold text-stone-900">$${subtotal.toFixed(2)}</span>
+                            <div class="flex items-center gap-1 bg-white border border-stone-300 rounded-lg p-0.5">
+                                <button onclick="updateQty('${id}', -1)" class="w-5 h-5 flex items-center justify-center font-bold text-stone-600">-</button>
+                                <button onclick="updateQty('${id}', 1)" class="w-5 h-5 flex items-center justify-center font-bold text-stone-600">+</button>
+                            </div>
+                        </div>
+                    `;
+                    cartList.appendChild(div);
+                });
+            }
+
+            document.getElementById('cartTotalDisplay').innerText = `$${totalUSD.toFixed(2)}`;
+            lucide.createIcons();
+        }
+
+        // WhatsApp Custom Generator
+        function sendWhatsAppOrder() {
+            if (Object.keys(cart).length === 0) {
+                alert("Please add at least one product to your order basket first!");
+                return;
+            }
+
+            const location = document.getElementById('deliveryLocation').value.trim() || 'Bulawayo';
+            let message = `*NEW ORDER - Evelyn Healthy Foods*\n\n`;
+            message += `*Delivery Location:* ${location}\n\n`;
+            message += `*Items Ordered:*\n`;
+
+            let totalUSD = 0;
+            Object.keys(cart).forEach(id => {
+                const item = products.find(p => p.id === id);
+                const qty = cart[id];
+                const subtotal = item.price * qty;
+                totalUSD += subtotal;
+                message += `• ${item.name} x${qty} ($${subtotal.toFixed(2)})\n`;
+            });
+
+            message += `\n*TOTAL AMOUNT:* $${totalUSD.toFixed(2)} USD`;
+            message += `\n\nPlease confirm availability and payment details!`;
+
+            const encoded = encodeURIComponent(message);
+            window.open(`https://wa.me/263774353952?text=${encoded}`, '_blank');
+        }
+
+        // Display Selected Recipe
+        function showRecipe(key) {
+            const recipe = recipes[key];
+            const card = document.getElementById('recipeDisplayCard');
+            
+            document.querySelectorAll('.recipe-tab').forEach(tab => {
+                if (tab.dataset.recipe === key) {
+                    tab.classList.add('bg-emerald-500', 'text-stone-900', 'font-bold');
+                } else {
+                    tab.classList.remove('bg-emerald-500', 'text-stone-900', 'font-bold');
+                }
+            });
+
+            card.innerHTML = `
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-emerald-800 pb-4">
+                    <div>
+                        <span class="text-xs text-amber-300 font-bold uppercase tracking-wider">Recommended Product: ${recipe.product}</span>
+                        <h3 class="text-2xl font-bold text-white">${recipe.title}</h3>
+                    </div>
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-white/10 rounded-full text-xs text-emerald-200">
+                        <i data-lucide="clock" class="w-4 h-4"></i> Prep Time: ${recipe.prep}
+                    </span>
+                </div>
+
+                <div class="space-y-3">
+                    <h4 class="font-bold text-sm text-emerald-300 uppercase tracking-wider">Easy Cooking Steps:</h4>
+                    <ol class="space-y-2 text-sm text-emerald-100 list-decimal list-inside leading-relaxed">
+                        ${recipe.steps.map(step => `<li class="p-2 rounded-lg bg-white/5 border border-white/10">${step}</li>`).join('')}
+                    </ol>
+                </div>
+            `;
+            lucide.createIcons();
+        }
+
+        // Cart Modal Drawer Toggle
+        function toggleCartModal() {
+            const modal = document.getElementById('cartModal');
+            const content = document.getElementById('cartContent');
+
+            if (modal.classList.contains('opacity-0')) {
+                modal.classList.remove('opacity-0', 'pointer-events-none');
+                content.classList.remove('translate-x-full');
+            } else {
+                modal.classList.add('opacity-0', 'pointer-events-none');
+                content.classList.add('translate-x-full');
+            }
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        }
+
+        function scrollToStore() {
+            document.getElementById('store').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        window.onload = function() {
+            lucide.createIcons();
+            renderProducts();
+            showRecipe('breakfast');
+        };
+    </script>
+</body>
+</html>
+```
